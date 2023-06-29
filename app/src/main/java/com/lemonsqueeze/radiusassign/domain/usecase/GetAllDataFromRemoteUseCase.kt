@@ -1,6 +1,6 @@
 package com.lemonsqueeze.radiusassign.domain.usecase
 
-import com.lemonsqueeze.radiusassign.data.model.RemoteDataModel
+import com.lemonsqueeze.radiusassign.data.dto.RemoteDataDto
 import com.lemonsqueeze.radiusassign.domain.repository.FacilitiesRepository
 import com.lemonsqueeze.radiusassign.utils.Response
 import kotlinx.coroutines.flow.Flow
@@ -9,17 +9,17 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-interface GetAllDataUseCase {
-    fun execute(): Flow<Response<RemoteDataModel>>
+interface GetAllDataFromRemoteUseCase {
+    fun execute(): Flow<Response<RemoteDataDto>>
 }
 
-class GetAllDataUseCaseImpl @Inject constructor(
+class GetAllDataFromRemoteUseCaseImpl @Inject constructor(
     private val facilitiesRepository: FacilitiesRepository
-) : GetAllDataUseCase {
-    override fun execute(): Flow<Response<RemoteDataModel>> = flow {
+) : GetAllDataFromRemoteUseCase {
+    override fun execute(): Flow<Response<RemoteDataDto>> = flow {
         try {
             emit(Response.Loading())
-            val data = facilitiesRepository.getAllData().toRemoteDataModel()
+            val data = facilitiesRepository.getAllDataFromRemote()
             emit(Response.Success(data = data))
         } catch (e: HttpException) {
             e.printStackTrace()

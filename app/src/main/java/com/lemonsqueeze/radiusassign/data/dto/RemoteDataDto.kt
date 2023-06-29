@@ -1,12 +1,18 @@
 package com.lemonsqueeze.radiusassign.data.dto
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import com.lemonsqueeze.radiusassign.data.dto.exclusion.ExclusionItemDto
 import com.lemonsqueeze.radiusassign.data.dto.facility.FacilityItemDto
 import com.lemonsqueeze.radiusassign.data.model.RemoteDataModel
 import com.lemonsqueeze.radiusassign.data.model.exclusion.ExclusionModel
 
+@Entity(tableName = RemoteDataDto.TABLE_NAME)
 data class RemoteDataDto(
+    @PrimaryKey(autoGenerate = true)
+    var id: Int? = null,
+
     @SerializedName("facilities")
     val facilities: List<FacilityItemDto>,
 
@@ -21,4 +27,8 @@ data class RemoteDataDto(
             } )
         }
     )
+
+    companion object {
+        const val TABLE_NAME = "RemoteData"
+    }
 }
