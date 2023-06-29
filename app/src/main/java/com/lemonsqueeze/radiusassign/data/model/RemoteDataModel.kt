@@ -2,6 +2,7 @@ package com.lemonsqueeze.radiusassign.data.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.lemonsqueeze.radiusassign.data.model.exclusion.ExclusionModel
 
 data class RemoteDataModel(
     val facilities: List<FacilityModel>?,
@@ -10,12 +11,10 @@ data class RemoteDataModel(
     constructor(parcel: Parcel) : this(
         parcel.createTypedArrayList(FacilityModel),
         parcel.createTypedArrayList(ExclusionModel)
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeTypedList(facilities)
-        parcel.writeTypedList(exclusions)
     }
 
     override fun describeContents(): Int {

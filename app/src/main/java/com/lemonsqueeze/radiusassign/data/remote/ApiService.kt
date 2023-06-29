@@ -5,7 +5,7 @@ import retrofit2.http.GET
 
 interface ApiService {
 
-    @GET("iranjith4/ad-assignment/db")
+    @GET(".")
     suspend fun getAllData(): RemoteDataDto
 
 }

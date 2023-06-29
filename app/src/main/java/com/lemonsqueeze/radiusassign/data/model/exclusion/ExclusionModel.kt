@@ -1,22 +1,17 @@
-package com.lemonsqueeze.radiusassign.data.model
+package com.lemonsqueeze.radiusassign.data.model.exclusion
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
 
 data class ExclusionModel(
-    val facilityId: String?,
-    val optionId: String?
-): Parcelable {
+    val exclusion: List<ExclusionSubModel>?
+) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString()
-    ) {
-    }
+        parcel.createTypedArrayList(ExclusionSubModel)
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(facilityId)
-        parcel.writeString(optionId)
+        parcel.writeTypedList(exclusion)
     }
 
     override fun describeContents(): Int {

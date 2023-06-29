@@ -1,19 +1,24 @@
 package com.lemonsqueeze.radiusassign.data.dto
 
 import com.google.gson.annotations.SerializedName
-import com.lemonsqueeze.radiusassign.data.dto.exclusion.ExclusionsDto
-import com.lemonsqueeze.radiusassign.data.dto.facility.FacilitiesDto
+import com.lemonsqueeze.radiusassign.data.dto.exclusion.ExclusionItemDto
+import com.lemonsqueeze.radiusassign.data.dto.facility.FacilityItemDto
 import com.lemonsqueeze.radiusassign.data.model.RemoteDataModel
+import com.lemonsqueeze.radiusassign.data.model.exclusion.ExclusionModel
 
 data class RemoteDataDto(
     @SerializedName("facilities")
-    val facilities: FacilitiesDto,
+    val facilities: List<FacilityItemDto>,
 
     @SerializedName("exclusions")
-    val exclusions: ExclusionsDto
+    val exclusions: List<List<ExclusionItemDto>>
 ) {
     fun toRemoteDataModel(): RemoteDataModel = RemoteDataModel(
-        facilities = facilities.toFacilitiesModelList(),
-        exclusions = exclusions.toExclusionModelList()
+        facilities = facilities.map { it.toFacilityModel() },
+        exclusions = exclusions.map {
+            ExclusionModel( it.map { exclusionItem ->
+                exclusionItem.toExclusionModel()
+            } )
+        }
     )
 }

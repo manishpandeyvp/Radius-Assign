@@ -1,7 +1,7 @@
 package com.lemonsqueeze.radiusassign.data.dto.facility
 
 import com.google.gson.annotations.SerializedName
-import com.lemonsqueeze.radiusassign.data.dto.option.OptionsDto
+import com.lemonsqueeze.radiusassign.data.dto.option.OptionItemDto
 import com.lemonsqueeze.radiusassign.data.model.FacilityModel
 
 data class FacilityItemDto(
@@ -12,11 +12,11 @@ data class FacilityItemDto(
     val name: String,
 
     @SerializedName("options")
-    val options: OptionsDto
+    val options: List<OptionItemDto>
 ) {
     fun toFacilityModel(): FacilityModel = FacilityModel(
         facilityId = facilityId,
         name = name,
-        options = options.toOptionModelList()
+        options = options.map { it.toOptionModel() }
     )
 }
