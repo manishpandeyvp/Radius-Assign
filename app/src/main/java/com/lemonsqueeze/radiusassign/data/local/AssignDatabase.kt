@@ -10,7 +10,7 @@ import com.lemonsqueeze.radiusassign.utils.DataConverter
 
 @Database(entities = [RemoteDataDto::class], version = 1)
 @TypeConverters(DataConverter::class)
-abstract class AssignDatabase: RoomDatabase() {
+abstract class AssignDatabase : RoomDatabase() {
     abstract fun dao(): AssignDao
 
     companion object {
@@ -18,9 +18,11 @@ abstract class AssignDatabase: RoomDatabase() {
 
         @Synchronized
         fun getInstance(ctx: Context): AssignDatabase {
-            if(instance == null)
-                instance = Room.databaseBuilder(ctx.applicationContext, AssignDatabase::class.java,
-                    "note_database")
+            if (instance == null)
+                instance = Room.databaseBuilder(
+                    ctx.applicationContext, AssignDatabase::class.java,
+                    "note_database"
+                )
                     .fallbackToDestructiveMigration()
                     .build()
 

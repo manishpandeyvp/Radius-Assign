@@ -9,7 +9,7 @@ import javax.inject.Inject
 class FacilitiesRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
     private val dao: AssignDao
-): FacilitiesRepository {
+) : FacilitiesRepository {
     override suspend fun getAllDataFromRemote(): RemoteDataDto {
         return apiService.getAllData()
     }

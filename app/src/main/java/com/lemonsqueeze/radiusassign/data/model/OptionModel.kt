@@ -7,7 +7,7 @@ data class OptionModel(
     val name: String?,
     val icon: String?,
     val id: String?
-): Parcelable {
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),

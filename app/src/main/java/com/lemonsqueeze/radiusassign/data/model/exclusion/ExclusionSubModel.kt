@@ -6,12 +6,11 @@ import android.os.Parcelable
 data class ExclusionSubModel(
     val facilityId: String?,
     val optionId: String?
-): Parcelable {
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString()
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(facilityId)

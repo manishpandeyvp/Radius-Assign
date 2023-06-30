@@ -7,13 +7,12 @@ data class FacilityModel(
     val facilityId: String?,
     val name: String?,
     val options: List<OptionModel>?
-): Parcelable {
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
         parcel.createTypedArrayList(OptionModel)
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(facilityId)

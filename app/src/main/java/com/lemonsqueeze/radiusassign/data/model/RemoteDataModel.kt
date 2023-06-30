@@ -7,7 +7,7 @@ import com.lemonsqueeze.radiusassign.data.model.exclusion.ExclusionModel
 data class RemoteDataModel(
     val facilities: List<FacilityModel>?,
     val exclusions: List<ExclusionModel>?
-): Parcelable {
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.createTypedArrayList(FacilityModel),
         parcel.createTypedArrayList(ExclusionModel)
