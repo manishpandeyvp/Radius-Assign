@@ -4,14 +4,11 @@ import com.google.gson.annotations.SerializedName
 import com.lemonsqueeze.radiusassign.data.model.exclusion.ExclusionSubModel
 
 data class ExclusionItemDto(
-    @SerializedName("facility_id")
-    val facilityId: String,
+    @SerializedName("facility_id") val facilityId: String,
 
-    @SerializedName("options_id")
-    val optionId: String
+    @SerializedName("options_id") val optionId: String
 ) {
     fun toExclusionModel(): ExclusionSubModel = ExclusionSubModel(
-        facilityId = facilityId,
-        optionId = optionId
+        facilityId = facilityId, optionId = optionId
     )
 }

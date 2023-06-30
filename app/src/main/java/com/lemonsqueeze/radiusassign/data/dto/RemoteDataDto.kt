@@ -22,9 +22,9 @@ data class RemoteDataDto(
     fun toRemoteDataModel(): RemoteDataModel = RemoteDataModel(
         facilities = facilities.map { it.toFacilityModel() },
         exclusions = exclusions.map {
-            ExclusionModel( it.map { exclusionItem ->
+            ExclusionModel(it.map { exclusionItem ->
                 exclusionItem.toExclusionModel()
-            } )
+            })
         }
     )
 
