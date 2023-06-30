@@ -8,10 +8,13 @@ import android.widget.RadioButton
 import android.widget.RadioGroup.LayoutParams
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
+import com.lemonsqueeze.radiusassign.R
 import com.lemonsqueeze.radiusassign.data.model.OptionModel
 import com.lemonsqueeze.radiusassign.databinding.ActivityMainBinding
 import com.lemonsqueeze.radiusassign.presentation.viewmodel.FacilitiesViewModel
 import com.lemonsqueeze.radiusassign.utils.Constants
+import com.lemonsqueeze.radiusassign.utils.RadioButtonDrawable
 import com.lemonsqueeze.radiusassign.utils.SharedPref
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -42,14 +45,25 @@ class MainActivity : AppCompatActivity() {
 
         binding.ivNext.setOnClickListener {
             val size = viewModel.remoteModel?.facilities?.size ?: 0
+            val key = viewModel.remoteModel?.facilities?.get(viewModel.count)?.facilityId
+            key?.let {
+                if (!viewModel.getSelectedValues().containsKey(it)) {
+                    binding.tvNotSelected.visibility = View.VISIBLE
+                    return@setOnClickListener
+                }
+            } ?: return@setOnClickListener
+
+
             if (viewModel.count == size - 1) {
                 viewModel.count = 0
                 binding.rg.removeAllViews()
                 setRadioGroupForEachFacility()
                 viewModel.resetSelectedValues()
+                binding.tvNotSelected.visibility = View.GONE
                 return@setOnClickListener
             }
 
+            binding.tvNotSelected.visibility = View.GONE
             viewModel.count++
             binding.rg.removeAllViews()
             setRadioGroupForEachFacility()
@@ -128,17 +142,29 @@ class MainActivity : AppCompatActivity() {
 
     private fun setRadioButton(option: OptionModel, facilityId: String?) {
         val rb = RadioButton(applicationContext)
+
         rb.id = View.generateViewId()
         rb.text = option.name
+
         val params = LinearLayout.LayoutParams(
-            LayoutParams.MATCH_PARENT,
             LayoutParams.WRAP_CONTENT,
-            1f
+            LayoutParams.WRAP_CONTENT,
+            0.5f
         )
+
         rb.layoutParams = params
+        rb.background =
+            ResourcesCompat.getDrawable(resources, R.drawable.radio_button_custom_bg, null)
+        rb.buttonDrawable = ResourcesCompat.getDrawable(
+            resources,
+            RadioButtonDrawable().getDrawable(option.icon!!),
+            null
+        )
+        rb.setPadding(0, 0, 30, 0)
         rb.setOnClickListener {
             facilityId?.let { viewModel.setSelectedValue(facilityId, option.id!!) }
         }
+
         binding.rg.addView(rb)
     }
 

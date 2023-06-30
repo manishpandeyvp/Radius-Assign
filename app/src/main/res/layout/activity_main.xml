@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/form_title"
-                android:textSize="26sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -61,27 +61,24 @@
                 android:id="@+id/rg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_heading">
 
-
             </RadioGroup>
 
-            <GridView
-                android:id="@+id/gv"
+            <TextView
+                android:id="@+id/tv_not_selected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:horizontalSpacing="5dp"
-                android:maxHeight="200dp"
-                android:numColumns="2"
-                android:verticalSpacing="5dp"
+                android:text="@string/please_select_an_option"
+                android:textColor="@android:color/holo_red_dark"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rg"
-                tools:listitem="@layout/facility_item" />
+                app:layout_constraintTop_toBottomOf="@id/rg" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
@@ -93,7 +90,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/gv">
+                app:layout_constraintTop_toBottomOf="@id/tv_not_selected">
 
                 <ImageView
                     android:id="@+id/iv_next"
